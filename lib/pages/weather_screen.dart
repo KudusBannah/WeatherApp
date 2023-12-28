@@ -38,14 +38,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
         wind = weatherData[0]['wind']['speed'];
         condition = weatherData[0]['weather'][0]['main'];
         time = weatherData[1]['utc_datetime'];
-        offset = weatherData[1]['utc_offset'].substring(1, 3);
+        offset = weatherData[1]['utc_offset'].substring(0, 3);
 
         DateTime now = DateTime.parse(time!);
         now = now.add(Duration(hours: int.parse(offset!)));
 
         weekday = getDay(now.weekday);
         time = DateFormat.jm().format(now);
-        isDayTime = now.hour > 6 && now.hour < 17;
+        isDayTime = now.hour >= 6 && now.hour < 17;
       } catch (e) {
         temperature = 0;
         cityName = "Unknown location";
